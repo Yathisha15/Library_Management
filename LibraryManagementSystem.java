@@ -4,37 +4,37 @@ import java.util.Scanner;
 class Book {
     private String title;
     private String author;
-    private boolean isCheckedOut;
+    private String checkoutStatus;
 
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
-        this.isCheckedOut = false;
+        this.checkoutStatus = "Available";
     }
 
     public String getTitle() {
         return title;
     }
-                                                
+
     public String getAuthor() {
         return author;
     }
 
-    public boolean isCheckedOut() {
-        return isCheckedOut;
+    public String getCheckOutStatus() {
+        return checkoutStatus;
     }
 
     public void checkOut() {
-        isCheckedOut = true;
+        checkoutStatus = "Not avialable or Someone already taken from the library";
     }
 
     public void checkIn() {
-        isCheckedOut = false;
+        checkoutStatus = "Available";
     }
 
     @Override
     public String toString() {
-        return "Title: " + title + ", Author: " + author + ", Checked Out: " + isCheckedOut;
+        return "Title: " + title + ", Author: " + author + ", status: " + checkoutStatus;
     }
 }
 
@@ -57,7 +57,7 @@ class Library {
 
     public void checkOutBook(String title) {
         for (Book book : books) {
-            if (book.getTitle().equals(title) && !book.isCheckedOut()) {
+            if (book.getTitle().equals(title) && book.getCheckOutStatus().equals("Available")) {
                 book.checkOut();
                 System.out.println("Book checked out successfully.");
                 return;
@@ -68,7 +68,7 @@ class Library {
 
     public void checkInBook(String title) {
         for (Book book : books) {
-            if (book.getTitle().equals(title) && book.isCheckedOut()) {
+            if (book.getTitle().equals(title) && book.getCheckOutStatus().equals("Not avialable or Someone already taken from the library")) {
                 book.checkIn();
                 System.out.println("Book checked in successfully.");
                 return;
@@ -85,10 +85,12 @@ public class LibraryManagementSystem {
         Book book1 = new Book("Parisarada Kathegalu", "Poornachandra Thejaswi");
         Book book2 = new Book("Malenadina Chithragalu", "Kuvempu");
         Book book3 = new Book("Karvalo", "Poornachandra Thejaswi");
+        Book book4 = new Book("Ramayana Darshanam", "Kuvempu");
 
         library.addBook(book1);
         library.addBook(book2);
         library.addBook(book3);
+        library.addBook(book4);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -101,7 +103,7 @@ public class LibraryManagementSystem {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
