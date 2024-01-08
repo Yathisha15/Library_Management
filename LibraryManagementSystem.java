@@ -76,7 +76,24 @@ class Library {
         }
         System.out.println("Book not found or not checked out.");
     }
+
+    public void addBookByFaculty(String title, String author) {
+    Book newBook = new Book(title, author);
+    addBook(newBook);
+    System.out.println("Book added successfully by faculty.");
 }
+
+    public void removeBookByFaculty(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                books.remove(book);
+                System.out.println("Book removed successfully by faculty.");
+                return;
+            }
+        }
+        System.out.println("Book not found or not removed by faculty.");
+    }
+    }
 
 public class LibraryManagementSystem {
     public static void main(String[] args) {
@@ -94,7 +111,43 @@ public class LibraryManagementSystem {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        System.out.println("\nLibrary Management System");
+
+        System.out.println("1.For Faculties");
+        System.out.println("2.For Library Visitors");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+    System.out.println("Welcome back, it's our pleasure to have a worker like you in our company");
+    System.out.println("1. Add Book");
+    System.out.println("2. Remove Book");
+    System.out.print("Enter your choice: ");
+    int facultyChoice = scanner.nextInt();
+    scanner.nextLine();  
+
+    switch (facultyChoice) {
+            case 1:
+                System.out.print("Enter the title of the book to add: ");
+                String addTitle = scanner.nextLine();
+                System.out.print("Enter the author of the book to add: ");
+                String addAuthor = scanner.nextLine();
+                library.addBookByFaculty(addTitle, addAuthor);
+                break;
+            case 2:
+                System.out.print("Enter the title of the book to remove: ");
+                String removeTitle = scanner.nextLine();
+                library.removeBookByFaculty(removeTitle);
+                break;
+            default:
+                System.out.println("Invalid choice. Please enter a valid option.");
+                break;
+        }
+        break;
+
+            
+            case 2:
+            while (true) {
             System.out.println("\nLibrary Management System");
             System.out.println("1. Display Books");
             System.out.println("2. Check Out a Book");
@@ -102,10 +155,10 @@ public class LibraryManagementSystem {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+            int choice2 = scanner.nextInt();
             scanner.nextLine(); 
 
-            switch (choice) {
+            switch (choice2) {
                 case 1:
                     library.displayBooks();
                     break;
@@ -125,6 +178,43 @@ public class LibraryManagementSystem {
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
             }
+
+            }
+
+        
         }
+
+        // while (true) {
+            // System.out.println("\nLibrary Management System");
+            // System.out.println("1. Display Books");
+            // System.out.println("2. Check Out a Book");
+            // System.out.println("3. Check In a Book");
+            // System.out.println("4. Exit");
+            // System.out.print("Enter your choice: ");
+
+            // int choice = scanner.nextInt();
+            // scanner.nextLine(); 
+
+            // switch (choice) {
+            //     case 1:
+            //         library.displayBooks();
+            //         break;
+            //     case 2:
+            //         System.out.print("Enter the title of the book to check out: ");
+            //         String checkOutTitle = scanner.nextLine();
+            //         library.checkOutBook(checkOutTitle);
+            //         break;
+            //     case 3:
+            //         System.out.print("Enter the title of the book to check in: ");
+            //         String checkInTitle = scanner.nextLine();
+            //         library.checkInBook(checkInTitle);
+            //         break;
+            //     case 4:
+            //         System.out.println("Exiting the Library Management System. Goodbye!");
+            //         System.exit(0);
+            //     default:
+            //         System.out.println("Invalid choice. Please enter a valid option.");
+            // }
+        // }
     }
 }
